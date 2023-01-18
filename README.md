@@ -1,4 +1,4 @@
-# SyncAction
+# gpml-sync-action
 
 Build the jar:
 ```
