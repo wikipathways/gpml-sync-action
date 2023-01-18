@@ -12,7 +12,7 @@
         <mkdir dir="build/jar"/>
         <jar destfile="build/jar/SyncAction.jar" basedir="build/classes">
             <manifest>
-                <attribute name="Main-Class" value="SyncAction.main"/>
+                <attribute name="Main-Class" value="org.wikipathways.SyncAction"/>
             </manifest>
         </jar>
     </target>
