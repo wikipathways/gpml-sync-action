@@ -9,3 +9,6 @@ build/*
 
 # jenv
 *.java-version
+
+# pathways
+pathways/*
