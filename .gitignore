@@ -1,0 +1,11 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# built files
+build/*
+
+# jenv
+*.java-version
