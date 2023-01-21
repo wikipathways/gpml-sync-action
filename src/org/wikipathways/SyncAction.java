@@ -56,6 +56,8 @@ public class SyncAction {
 //			URL urlPathway = new URL("https://www.wikipathways.org//wpi/wpi.php?action=downloadFile&type=gpml&pwTitle=Pathway:" + id + "&oldid=" + taggedRev.get(id));
 			URL urlPathway = new URL("https://www.wikipathways.org//wpi/wpi.php?action=downloadFile&type=gpml&pwTitle=Pathway:" + id);
 			URLConnection urlConPathway = urlPathway.openConnection();
+			//add user agent for Ubuntu/GH Action operation
+			urlConPathway.addRequestProperty("User-Agent", "Mozilla");
 			Pathway model = new Pathway();
 			model.readFromXml(urlConPathway.getInputStream(), false);
 			model.getMappInfo().setMapInfoDataSource("WikiPathways");
