@@ -1,10 +1,6 @@
-# Compiled class file
+# Java files
 *.class
-
-# Log file
-*.log
-
-# built files
+.project
 build/*
 
 # jenv
