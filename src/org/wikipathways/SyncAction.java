@@ -36,25 +36,41 @@ public class SyncAction {
 			changedRev.put(i.getId(), i.getRevision());
 
 		}
-		System.out.println(changedPwy.length + "\t" + changed.size() + "\t" + changed); 
+		System.out.println("All changed pathways: " + changedPwy.length + "\t" + changed.size() + "\t" + changed); 
+
+		File dirPath = new File("pathways/");
+		List<String> wpidList = new ArrayList<>();
+    	File[] dirList = dirPath.listFiles(File::isDirectory);
+		if (dirList != null) {
+			for (File d : dirList) {
+			  if (d.isDirectory()) {
+				wpidList.add(d.getName());
+			  }
+			}
+		  }
+
+		System.out.println("Current pathways: " + wpidList.size() ); 
 
 		WSCurationTag [] curatedPwy = client.getCurationTagsByName("Curation:AnalysisCollection");
 		Set<String> curated = new HashSet<String>();
-//		Map<String, String> taggedRev = new HashMap<String, String>();
 		for(WSCurationTag i : curatedPwy) {
 			curated.add(i.getPathway().getId());
-//			taggedRev.put(i.getPathway().getId(), i.getPathway().getRevision());
+			//also collect newly approved, regardless of recent edit
+			if(!wpidList.contains(i.getPathway().getId())) {
+				changed.add(i.getPathway().getId());
+				changedRev.put(i.getPathway().getId(), i.getPathway().getRevision());
+			}
 		}
 		
-		System.out.println(curatedPwy.length + "\t" + curated.size()); 
+		System.out.println("Approved pathways: " + curatedPwy.length + "\t" + curated.size()); 
 
 		curated.retainAll(changed);
 		
-		System.out.println(curated.size());
+		System.out.println("Newly approved and changed pathways: " + curated.size());
 
 		for(String id : curated) {
-//			URL urlPathway = new URL("https://www.wikipathways.org//wpi/wpi.php?action=downloadFile&type=gpml&pwTitle=Pathway:" + id + "&oldid=" + taggedRev.get(id));
-			URL urlPathway = new URL("https://www.wikipathways.org//wpi/wpi.php?action=downloadFile&type=gpml&pwTitle=Pathway:" + id);
+//			URL urlPathway = new URL("https://www.wikipathways.org/wpi/wpi.php?action=downloadFile&type=gpml&pwTitle=Pathway:" + id + "&oldid=" + taggedRev.get(id));
+			URL urlPathway = new URL("https://www.wikipathways.org/wpi/wpi.php?action=downloadFile&type=gpml&pwTitle=Pathway:" + id);
 			Pathway model = new Pathway();
 			model.readFromXml(urlPathway.openStream(), false);
 			model.getMappInfo().setMapInfoDataSource("WikiPathways");
