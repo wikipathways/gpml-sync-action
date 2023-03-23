@@ -5,9 +5,13 @@
 ant build
 ```
 
+---
+
 ### Run the jar:
 
 You have two options to run the sync action:
+
+---
 
 **1) Regular syncing**
 
@@ -22,6 +26,7 @@ The arg is a date stamp with the format: YYYYMMDDHHMMSS. You can generate a date
 $(date --utc +%Y%m%d%H%M%S -d "1 day ago")
 ```
 
+---
 
 **2) Update list of pathways**
 
