@@ -10,6 +10,7 @@ ant build
 You have two options to run the sync action:
 
 **1) Regular syncing**
+
 Pull in recent changes on classic site since a specific timepoint
 
 ```
@@ -23,6 +24,7 @@ $(date --utc +%Y%m%d%H%M%S -d "1 day ago")
 
 
 **2) Update list of pathways**
+
 Reads list of identifiers from file (one WP identifier per line) and syncs their latest revision from the classic site
 
 ```
