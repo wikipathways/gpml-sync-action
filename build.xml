@@ -8,8 +8,10 @@
 
     <target name="build">
         <mkdir dir="build/classes"/>
+        <mkdir dir="jar"/>
+
         <javac includeantruntime="true" srcdir="src" destdir="build/classes" classpathref="classpath"/>
-        <jar destfile="build/SyncAction.jar" basedir="build/classes">
+        <jar destfile="jar/SyncAction.jar" basedir="build/classes">
             <zipgroupfileset dir="lib" includes="**/*.jar"/>
             <manifest>
                 <attribute name="Main-Class" value="org.wikipathways.SyncAction"/>
