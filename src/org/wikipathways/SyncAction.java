@@ -36,7 +36,7 @@ import org.wikipathways.client.WikiPathwaysClient;
 public class SyncAction {
 
 	// args = date of last sync
-	public static void main(String[] args) throws ParseException, IOException, ConverterException {
+	public static void main(String[] args) throws ParseException, IOException, ConverterException, Exception {
 		WikiPathwaysClient client = new WikiPathwaysClient(new URL("https://webservice.wikipathways.org"));
 		List<String> pathways2Sync = new ArrayList<String>();
 		Map<String, String> pathwaysNewRev = new HashMap<String, String>();
@@ -103,6 +103,7 @@ public class SyncAction {
 		
 		// sync all recently changed or selected pathways
 		Map<String, Exception> error = new HashMap<String, Exception>();
+		
 		if (pathways2Sync.size() > 0) {
 			System.out.println("Syncing of " + pathways2Sync.size() + " pathways started.");
 			for (String id : pathways2Sync) {
@@ -138,6 +139,9 @@ public class SyncAction {
 				System.out.println(id +"\n");
 				error.get(id).printStackTrace();
 				System.out.println("");
+			}
+			if(error.size() > 0) {
+				throw new Exception("Synchronization failed.");
 			}
 		}
 	}
