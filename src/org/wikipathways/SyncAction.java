@@ -108,7 +108,7 @@ public class SyncAction {
 			System.out.println("Syncing of " + pathways2Sync.size() + " pathways started.");
 			for (String id : pathways2Sync) {
 				try {
-					URL urlPathway = new URL("https://www.wikipathways.org/wpi/wpi.php?action=downloadFile&type=gpml&pwTitle=Pathway:" + id);
+					URL urlPathway = new URL("https://classic.wikipathways.org/wpi/wpi.php?action=downloadFile&type=gpml&pwTitle=Pathway:" + id);
 					Pathway model = new Pathway();
 					model.readFromXml(urlPathway.openStream(), false);
 					model.getMappInfo().setMapInfoDataSource("WikiPathways");
